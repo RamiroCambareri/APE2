@@ -28,3 +28,4 @@ typedef struct Gastos
     int cantGastos[MAX_GASTOS];
     float sumaGastos;
 } tipoGastos;
+// hola
