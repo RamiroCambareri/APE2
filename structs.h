@@ -1,0 +1,30 @@
+// #define MAX_USUARIOS 5 //vector de usuario
+// #define MAX_NOMBRE_CATEGORIA 20 //vector de categorias
+// #define MAX_GASTOS 100 //vector de gastos
+
+#define MAX_USUARIOS 3
+#define MAX_NOMBRE_CATEGORIA 20
+#define MAX_GASTOS 100
+
+typedef struct Usuario
+{
+    char nombre[25];
+    char apellido[25];
+    int dni;
+    int ID;
+} tipoUsuario;
+
+typedef struct Categoria
+{
+    char nombreCategoria[MAX_NOMBRE_CATEGORIA];
+    int IdCategoria[];
+} tipoCategoria;
+
+typedef struct Gastos
+{
+    float gasto;
+    tipoUsuario usuario;
+    tipoCategoria categoria;
+    int cantGastos[MAX_GASTOS];
+    float sumaGastos;
+} tipoGastos;
