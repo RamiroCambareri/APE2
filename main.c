@@ -8,12 +8,13 @@
 int main()
 {
     int opcion = 0;
-    int dimL = 0;
-    int diml2 = 0;
-    int diml3 = 0;
+    int diml2 = 0; // usuario
+    int diml3 = 0; // gastos
+    float promedio=0;
+
     tipoCategoria categorias[5] = {{"Comida"}, {"Transporte"}, {"Entretenimiento"}, {"Estudios"}, {"Varios"}};
     tipoUsuario users[MAX_USUARIOS];
-    tipoGastos gastos[MAX_GASTOS];
+    tipoGastos gasto[MAX_GASTOS];
 
     // tipoGastos gastos;
 
@@ -30,16 +31,15 @@ int main()
         else if (opcion == 2)
         {
             // Pasamos referencias (&) para que los cambios persistan en el main
-            mostrar_menu_gastos(users, gastos, categorias, &diml2, &diml3); // Mostramos el menú de gastos para el primer usuario
+            mostrar_menu_gastos(users, gasto, categorias, &diml2, &diml3); // Mostramos el menú de gastos para el primer usuario
         }
         else if (opcion == 3)
         {
-            generar_reporte(users, gastos[0], categorias[0]); // Llamamos a la función para generar el reporte del primer usuario y su primer gasto
-            // generar_reporte(users, gastos, categorias[0]);
+            generar_reporte(users, gasto, categorias, &diml2); // Llamamos a la función para generar el reporte del primer usuario y su primer gasto
         }
         else if (opcion == 4)
         {
-            // mostrar_menu_calculos_estadisticos(gastos);
+            mostrar_menu_calculos_estadisticos(users, gasto,&diml2,&diml3,&promedio);
         }
         else if (opcion != 5)
         {

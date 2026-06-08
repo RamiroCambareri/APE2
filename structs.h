@@ -17,15 +17,15 @@ typedef struct Usuario
 typedef struct Categoria
 {
     char nombreCategoria[MAX_NOMBRE_CATEGORIA];
-    int IdCategoria[];
+    int IdCategoria[]; // -- Si no sirve, hay que borrar el vector y dejar solo el ID --
 } tipoCategoria;
 
 typedef struct Gastos
 {
+    int IDGasto;
     float gasto;
     tipoUsuario usuario;
     tipoCategoria categoria;
     int cantGastos[MAX_GASTOS];
     float sumaGastos;
 } tipoGastos;
-// hola
