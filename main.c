@@ -4,13 +4,32 @@
 #include "structs.h"
 #include "functions.h"
 
+void debuggear(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3)
+{
+    printf("\n--- DEBUGGEO DE USUARIOS ---\n");
+    for (int i = 0; i < *diml2; i++)
+    {
+        printf("\nID: %d, Nombre: %s, Apellido: %s, DNI: %d\n", users[i].ID, users[i].nombre, users[i].apellido, users[i].dni);
+    }
+    printf("\n--- DEBUGGEO DE GASTOS ---\n");
+    for (int j = 0; j < *diml3; j++)
+    {
+        printf("\nID Gasto: %d, Monto: %.2f, Usuario ID: %d\n", gasto[j].IDGasto, gasto[j].gasto, gasto[j].usuario.ID);
+    }
+    printf("\n--- DEBUGGEO DE CATEGORIAS ---\n");
+    for (int k = 0; k < 5; k++)
+    {
+        printf("\nID Categoria: %d, Nombre Categoria: %s\n", categorias[k].IdCategoria, categorias[k].nombreCategoria);
+    }
+}
+
 // PROGRAMA PRINCIPAL
 int main()
 {
     int opcion = 0;
     int diml2 = 0; // usuario
     int diml3 = 0; // gastos
-    float promedio=0;
+   
 
     tipoCategoria categorias[5] = {{"Comida"}, {"Transporte"}, {"Entretenimiento"}, {"Estudios"}, {"Varios"}};
     tipoUsuario users[MAX_USUARIOS];
@@ -19,6 +38,10 @@ int main()
     // tipoGastos gastos;
 
     inicializar_usuarios(users);
+    // inicializar_categorias(categorias);
+    inicializar_gastos(gasto);
+
+    debuggear(users, gasto, categorias, &diml2, &diml3); // Función para debuggear, puedes eliminarla si no es necesaria
     
     mostrar_menu(&opcion);
 
@@ -39,7 +62,7 @@ int main()
         }
         else if (opcion == 4)
         {
-            mostrar_menu_calculos_estadisticos(users, gasto,&diml2,&diml3,&promedio);
+            mostrar_menu_calculos_estadisticos(gasto, &diml3);
         }
         else if (opcion != 5)
         {
@@ -50,5 +73,7 @@ int main()
 
     printf("\nSaliendo del programa...\n");
 
+
+    debuggear(users, gasto, categorias, &diml2, &diml3); // Función para debuggear, se puede eliminar si no es necesaria
     return 0;
 }
