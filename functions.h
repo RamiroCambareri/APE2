@@ -10,7 +10,6 @@ void modificar_perfil_usuario(tipoUsuario users[], int *diml2);
 
 // Inicializar registros
 void inicializar_usuarios(tipoUsuario users[]); // HECHO
-void inicializar_categorias(tipoCategoria categorias[]); 
 void inicializar_gastos(tipoGastos gasto[]);
 
 /* Menu gastos */
