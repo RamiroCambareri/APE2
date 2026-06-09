@@ -1,7 +1,3 @@
-// #define MAX_USUARIOS 3 //vector de usuario
-// #define MAX_NOMBRE_CATEGORIA 20 //vector de categorias
-// #define MAX_GASTOS 100 //vector de gastos
-
 #define MAX_USUARIOS 3
 #define MAX_NOMBRE_CATEGORIA 20
 #define MAX_GASTOS 100
@@ -17,7 +13,7 @@ typedef struct Usuario
 typedef struct Categoria
 {
     char nombreCategoria[MAX_NOMBRE_CATEGORIA + 1]; // se pone + 1 para dejar el espacio para el '\0'
-    int IdCategoria; // -- Si no sirve, hay que borrar el vector y dejar solo el ID --
+    int IdCategoria;
 } tipoCategoria;
 
 typedef struct Gastos
