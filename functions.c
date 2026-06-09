@@ -61,18 +61,6 @@ void inicializar_usuarios(tipoUsuario users[])
     }
 }
 
-// void inicializar_categorias(tipoCategoria categorias[])
-// {
-//     for (int i = 0; i < MAX_NOMBRE_CATEGORIA; i++)
-//     {
-//         categorias[i].IdCategoria = 0;
-//         for (int j = 0; j < MAX_NOMBRE_CATEGORIA; j++)
-//         {
-//             categorias[i].nombreCategoria[0] = '\0'; // SI HAY ERROR ES EL [0] ""
-//         }
-//     }
-// }
-
 void inicializar_gastos(tipoGastos gasto[])
 {
     for (int i = 0; i < 5; i++)
@@ -147,7 +135,6 @@ void modificar_perfil_usuario(tipoUsuario users[], int *diml2)
             printf("\nUsuario modificado. Nuevo perfil: %s %s, DNI: %d, ID: %d\n", users[i].nombre, users[i].apellido, users[i].dni, users[i].ID);
             return;
         }
-        
     }
     printf("\nUsuario con ID %d no encontrado.\n", id_buscado);
 }
@@ -157,7 +144,8 @@ void eliminar_usuario(tipoUsuario users[], int *diml2)
     printf("\nIngrese ID de usuario a eliminar: ");
     int id_buscado;
     scanf("%d", &id_buscado);
-    for (int i = 0; i < *diml2; i++){
+    for (int i = 0; i < *diml2; i++)
+    {
         // busca el id usuario
         if (users[i].ID == id_buscado)
         {
@@ -169,37 +157,12 @@ void eliminar_usuario(tipoUsuario users[], int *diml2)
                 users[j] = users[j + 1];
             }
             (*diml2)--;
-            //users[i].ID = 0;
-            //users[i].dni = 0;
-            //users->apellido[0] = '\0';
-            //users->nombre[0] = '\0';
-            //(*diml2)--;
             printf("\nUsuario eliminado. Nueva dimensión lógica: %d\n", *diml2);
             return;
         }
     }
-    printf("\nUsuario con ID %d no encontrado\n",id_buscado);
+    printf("\nUsuario con ID %d no encontrado\n", id_buscado);
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-// CORRIMIENTO DE USUARIOS PARA LA FUNCION ELIMINAR USUARIOS (NO FUNCIONA CORRECTAMENTE, REVISAR)
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-// for (int j = i; j < *diml2 - 1; j++) {
-//     // ANA, LUZ, LUIS
-//     users->ID[j] = users->ID[j + 1];
-//     users->dni[j] = users->dni[j + 1];
-
-//     // Para las cadenas de texto (char) usamos strcpy para copiar el contenido
-//     strcpy(users->apellido[j], users->apellido[j + 1]);
-//     strcpy(users->nombre[j], users->nombre[j + 1]);
-// }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Implementacion de procedimiento mostrar_menu_gastos
 void mostrar_menu_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3)
@@ -236,15 +199,12 @@ void mostrar_menu_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria 
 
 void agregar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3)
 {
-    // (*diml3) = (*diml2); // Sincronizamos la dimensión lógica de gastos con la de usuarios para asegurar que cada gasto esté asociado a un usuario válido
     int posicion = (*diml3);
     gasto->IDGasto += 0; // Inicializamos el ID del gasto (puede ser incrementado posteriormente para cada nuevo gasto)
 
     int ID_buscado;
     int opcion;
     int i, j, aux;
-
-    // printf("\n DIMENSION LOGICA 2:: %d\n", *diml2);
 
     printf("Ingrese su id a buscar: ");
     scanf("%d", &ID_buscado);
@@ -257,7 +217,8 @@ void agregar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categ
             printf("Categorias disponibles:\n");
             for (int j = 0; j < 5; j++)
             {
-                printf("\n--- Categoria %d: ", j + 1);
+                printf("\n|--- Categoria %d: ", j + 1);
+                printf("\n|");
 
                 printf("%s\n", categorias[j].nombreCategoria);
             }
@@ -288,8 +249,6 @@ void agregar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categ
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////
-    printf("\nDIMENSION LOGICA 3:: %d\n", *diml3); // Para depurar la dimensión lógica de gasto
     for (int i = 0; i < *diml3; i++)
     {
         printf("\n--- Gasto %d registrado ---\n", i);
@@ -298,7 +257,6 @@ void agregar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categ
         printf("\nUsuario asociado: %s %s, DNI: %d, ID: %d\n", gasto[i].usuario.nombre, gasto[i].usuario.apellido, gasto[i].usuario.dni, gasto[i].usuario.ID);
         printf("\nCategoría del gasto: %s\n", gasto[i].categoria.nombreCategoria);
     }
-    //////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
 }
 
@@ -322,37 +280,17 @@ void modificar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria cat
                 scanf("%f", &gasto[i].gasto);
                 printf("\nGasto modificado. Nuevo monto: %.2f\n", gasto[i].gasto);
                 return;
-                // Actualizamos la suma total de gastos para reflejar el cambio[]
-                // if (gasto[i].sumaGastos >= gasto[i].gasto)
-                // {
-                //     gasto[i].sumaGastos -= gasto[i].gasto; // Restamos el monto anterior del gasto modificado
-                // }
-                // else if (gasto[i].sumaGastos < gasto[i].gasto)
-                // {
-                //     gasto[i].sumaGastos += gasto[i].gasto; // Sumamos el nuevo monto del gasto modificado
-                // }
-                // else
-                // {
-                //     printf("\nError al modificar el gasto. Por favor, intente nuevamente.\n");
-                // }
-
-                // gasto[i].sumaGastos; // Reiniciamos la suma total de gastos
-                // for (int j = 0; j < *diml3; j++)
-                // {
-                //     gasto[i].sumaGastos += gasto[j].gasto; // Recalculamos la suma total de gastos después de la modificación
-                // }
             }
-            
         }
         printf("\nGasto con ID %d no encontrado.\n", id_buscado);
     }
 }
 
-void consultar_usuario_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2,int *diml3) // agregue diml3 cambiar prototimos e invocaciones
+void consultar_usuario_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3) // agregue diml3 cambiar prototimos e invocaciones
 {
     int id_buscado;
-     float acumulador_total = 0;
-    int contadores_locales[5] = {0}; 
+    float acumulador_total = 0;
+    int contadores_locales[5] = {0};
     printf("\nIngrese ID de usuario para generar reporte: ");
     scanf("%d", &id_buscado);
     for (int i = 0; i < *diml2; i++)
@@ -360,43 +298,43 @@ void consultar_usuario_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCate
         if (users[i].ID == id_buscado)
         {
             printf("\nUsuario encontrado para el reporte: %s %s, DNI: %d, ID: %d\n", users[i].nombre, users[i].apellido, users[i].dni, users[i].ID);
-            //printf("\nSuma total: %2.f\n", gasto[i].sumaGastos);
-           // ponemos los 5 contadores de categorias en 0
+            // ponemos los 5 contadores de categorias en 0
             for (int j = 0; j < *diml3; j++)
             {
                 // ¿Este gasto en la posición j fue hecho por el usuario que estamos buscando?
-                if(gasto[j].usuario.ID == id_buscado){
-                acumulador_total += gasto[j].gasto;//acumulamos el monto real
-                // Para saber qué categoría sumar, podemos buscar cuál coincide.
-                // Recorremos las 5 categorías para comparar el nombre con el del gasto actual
-                for(int k = 0; k < 5; k++){
-                    if (strcmp(gasto[j].categoria.nombreCategoria, categorias[k].nombreCategoria) == 0){
-                        contadores_locales[k]++;
+                if (gasto[j].usuario.ID == id_buscado)
+                {
+                    acumulador_total += gasto[j].gasto; // acumulamos el monto real
+                    // Para saber qué categoría sumar, podemos buscar cuál coincide.
+                    // Recorremos las 5 categorías para comparar el nombre con el del gasto actual
+                    for (int k = 0; k < 5; k++)
+                    {
+                        if (strcmp(gasto[j].categoria.nombreCategoria, categorias[k].nombreCategoria) == 0)
+                        {
+                            contadores_locales[k]++;
+                        }
                     }
                 }
             }
-                //printf("Cantidad de gastos en categoría %s: %d\n", categorias[j].nombreCategoria, gasto[i].cantGastos[j]);
-        }
 
-        // 3. RECIÉN ACÁ imprimimos los resultados finales ya calculados
-             printf("\nSuma total gastada: $%.2f\n", acumulador_total);
-             printf("\n--- DETALLE POR CATEGORÍAS --- \n");
-             for(int j = 0; j < 5; j++){
-                printf("Cantidad de gastos en categorias %s: %d\n",categorias[j].nombreCategoria,contadores_locales[j]);
-             }
-             return;   
-        }   
+            // 3. RECIÉN ACÁ imprimimos los resultados finales ya calculados
+            printf("\nSuma total gastada: $%.2f\n", acumulador_total);
+            printf("\n--- DETALLE POR CATEGORÍAS --- \n");
+            for (int j = 0; j < 5; j++)
+            {
+                printf("Cantidad de gastos en categorias %s: %d\n", categorias[j].nombreCategoria, contadores_locales[j]);
+            }
+            return;
+        }
     }
     printf("\nEl usuario con ID %d no existe en el sistema.\n", id_buscado);
-    
 }
 
-
-void generar_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2,int *diml3)
+void generar_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3)
 {
     // Implementación de la función para generar un reporte basado en los gastos y categorías
     printf("\n--- REPORTE DE GASTOS ---\n");
-    consultar_usuario_reporte(users, gasto, categorias, diml2,diml3);
+    consultar_usuario_reporte(users, gasto, categorias, diml2, diml3);
 }
 
 void mostrar_menu_calculos_estadisticos(tipoGastos gasto[], int *diml3)
@@ -439,7 +377,7 @@ void calcular_promedio(tipoGastos gasto[], int *diml3)
 
     printf("\nIngrese su ID de usuario: ");
     scanf("%d", &ID_buscado);
-    
+
     for (int i = 0; i < *diml3; i++)
     {
         if (gasto[i].usuario.ID == ID_buscado)
@@ -447,35 +385,19 @@ void calcular_promedio(tipoGastos gasto[], int *diml3)
             suma_monto += gasto[i].gasto; // acumulamos el dinero real gastado
             cantidad_gasto++;
         }
-
     }
-    if(cantidad_gasto > 0){
+    if (cantidad_gasto > 0)
+    {
         promedio = suma_monto / cantidad_gasto;
         printf("\n--- ESTADÍSTICAS DEL USUARIO %d ---", ID_buscado);
         printf("\nSuma total: $%.2f", suma_monto);
         printf("\nCantidad de gastos registrados: %d", cantidad_gasto);
         printf("\nPROMEDIO GENERAL: $%.2f\n", promedio);
-    }else{
+    }
+    else
+    {
         printf("\nEl usuario con ID %d no tiene gastos en el sistema.\n", ID_buscado);
     }
-    //         if (total > 0)
-    //         {
-    //             promedio = gasto[i].sumaGastos / total;
-    //         }
-    //         if (gasto[i].cantGastos > 0)
-    //         {
-    //             // gasto->sumaGastos / gasto[i].cantGastos[i];
-    //             printf("\nUsuario:%d", gasto[i].usuario.ID);
-    //             printf("\nSuma total: $%.2f", gasto[i].sumaGastos);                  //
-    //             printf("\nCantidad de gastos registrados: %d", gasto[i].cantGastos); //
-    //             printf("\nPROMEDIO GENERAL: $%.2f\n", promedio);
-    //         }
-    //         else
-    //         {
-    //             printf("El usuario con ID %d no tiene gastos en el sistema\n", ID_buscado);
-    //         }
-    //     }
-    // }
 }
 
 void calcular_minimo(tipoGastos gasto[], int *diml3)
