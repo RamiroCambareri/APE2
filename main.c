@@ -29,7 +29,6 @@ int main()
     int opcion = 0;
     int diml2 = 0; // usuario
     int diml3 = 0; // gastos
-   
 
     tipoCategoria categorias[5] = {{"Comida"}, {"Transporte"}, {"Entretenimiento"}, {"Estudios"}, {"Varios"}};
     tipoUsuario users[MAX_USUARIOS];
@@ -58,7 +57,7 @@ int main()
         }
         else if (opcion == 3)
         {
-            generar_reporte(users, gasto, categorias, &diml2); // Llamamos a la función para generar el reporte del primer usuario y su primer gasto
+            generar_reporte(users, gasto, categorias, &diml2,&diml3); // Llamamos a la función para generar el reporte del primer usuario y su primer gasto
         }
         else if (opcion == 4)
         {
