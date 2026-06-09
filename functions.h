@@ -29,3 +29,5 @@ void calcular_minimo(tipoGastos gasto[], int *diml3);
 void calcular_maximo(tipoGastos gasto[], int *diml3);
 
 void debuggear(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3); 
+
+//comprobacion de git local. 
