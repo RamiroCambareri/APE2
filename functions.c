@@ -407,9 +407,9 @@ void mostrar_menu_calculos_estadisticos(tipoGastos gasto[], int *diml3)
     }
 }
 
-void calcular_promedio(tipoGastos gasto[], int *diml3)
+void calcular_promedio(tipoGastos gasto[], int *diml3)//usa el vector de gastos para calcular el promedio general por usuario
 {
-    int ID_buscado;
+    int ID_buscado;//variable de ID que se ingresa para buscar usuario
     float suma_total = 0;
     float promedio;
 
