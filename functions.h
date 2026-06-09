@@ -21,13 +21,9 @@ void modificar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria cat
 void eliminar_gastos(tipoUsuario users, tipoGastos gasto, tipoCategoria categorias, int *dimL);
 
 /* Reporte y Estadisticas */
-void generar_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2); // HECHO
+void generar_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3); // HECHO
 void mostrar_menu_calculos_estadisticos(tipoGastos gasto[], int *diml3); //HECHO
-void consultar_usuario_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2); // HECHO
+void consultar_usuario_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3); // HECHO
 void calcular_promedio(tipoGastos gasto[],int *diml3); 
 void calcular_minimo(tipoGastos gasto[], int *diml3);
 void calcular_maximo(tipoGastos gasto[], int *diml3);
-
-void debuggear(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3); 
-
-//comprobacion de git local. 
