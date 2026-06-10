@@ -16,7 +16,7 @@ void mostrar_menu(int *opcion)
     printf("\n5 - Salir");
     printf("\nSeleccione una opcion: ");
     scanf("%d", opcion);
-    getchar();
+    while (getchar() != '\n');
 }
 
 // Implementacion de la funcion para mostrar el submenu de perfil
@@ -32,7 +32,7 @@ void mostrar_menu_perfil(tipoUsuario users[], tipoGastos gasto[],int *diml2,int 
         printf("\n5 - Volver");
         printf("\nSeleccione una opcion: ");
         scanf("%d", &eleccion);
-        getchar();
+        while (getchar() != '\n');
         if (eleccion == 1)
         {
             crear_usuarios(users, diml2);
@@ -96,7 +96,7 @@ void crear_usuarios(tipoUsuario users[], int *diml2)
         scanf("%s", users[i].apellido);
         printf("\nIngrese DNI: ");
         scanf("%d", &users[i].dni);
-        getchar();
+        while (getchar() != '\n');
         users[i].ID = id_local;
         printf("\n El usuario creado es: %s %s, DNI: %d, ID: %d\n", users[i].nombre, users[i].apellido, users[i].dni, users[i].ID);
         (*diml2)++;
@@ -109,7 +109,7 @@ void modificar_perfil_usuario(tipoUsuario users[], int *diml2)
     printf("\nIngrese ID de usuario a modificar: ");
     int id_buscado;
     scanf("%d", &id_buscado);
-    getchar();
+    while (getchar() != '\n');
     for (int i = 0; i < *diml2; i++)
     {
         if (users[i].ID == id_buscado)
@@ -121,7 +121,7 @@ void modificar_perfil_usuario(tipoUsuario users[], int *diml2)
             scanf("%s", users[i].apellido);
             printf("\nIngrese nuevo DNI: ");
             scanf("%d", &users[i].dni);
-            getchar();
+            while (getchar() != '\n');
             printf("\nUsuario modificado. Nuevo perfil: %s %s, DNI: %d, ID: %d\n", users[i].nombre, users[i].apellido, users[i].dni, users[i].ID);
             return;
         }
@@ -134,7 +134,7 @@ void eliminar_usuario(tipoUsuario users[], tipoGastos gasto[],int *diml2, int *d
     printf("\nIngrese ID de usuario a eliminar: ");
     int id_buscado;
     scanf("%d", &id_buscado);
-    getchar();
+    while (getchar() != '\n');
     for (int i = 0; i < *diml2; i++)
     {
         // busca el id usuario
@@ -178,7 +178,7 @@ void mostrar_menu_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria 
         printf("\n5 - Volver");
         printf("\nSeleccione una opcion: ");
         scanf("%d", &eleccion);
-        getchar();
+        while (getchar() != '\n');
 
         if (eleccion == 1)
         {
@@ -220,7 +220,7 @@ void agregar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categ
 
     printf("Ingrese su id de usuario: ");
     scanf("%d", &ID_buscado);
-    getchar();
+    while (getchar() != '\n');
 
     for (i = 0; i < *diml2; i++)
     {
@@ -238,14 +238,14 @@ void agregar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categ
 
             printf("\nSeleccione una de las opciones que se muestran en pantalla [6 para salir]: ");
             scanf("%d", &opcion);
-            getchar();
+            while (getchar() != '\n');
 
             if (opcion >= 1 && opcion <= 5)
             {
                 int idx = opcion - 1;
                 printf("\nIngrese monto del gasto: ");
                 scanf("%f", &gasto[posicion].gasto);
-                getchar();
+                while (getchar() != '\n');
                 gasto[posicion].IDGasto = posicion + 1;
                 gasto[posicion].usuario = users[i];
                 gasto[posicion].categoria = categorias[idx];
@@ -281,7 +281,7 @@ void modificar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria cat
     {
         printf("\n Ingrese el ID del gasto a modificar: ");
         scanf("%d", &id_buscado);
-        getchar();
+        while (getchar() != '\n');
         for (int i = 0; i < *diml3; i++)
         {
             if (gasto[i].IDGasto == id_buscado)
@@ -289,7 +289,7 @@ void modificar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria cat
                 printf("\nGasto encontrado, modificando...");
                 printf("\nIngrese nuevo monto del gasto: ");
                 scanf("%f", &gasto[i].gasto);
-                getchar();
+                while (getchar() != '\n');
                 printf("\nGasto modificado. Nuevo monto: %.2f\n", gasto[i].gasto);
                 return;
             }
@@ -307,11 +307,11 @@ void eliminar_gastos(tipoUsuario users[], tipoGastos gasto[],int *diml3)
     }
     printf("Ingrese eL ID de usuario: ");
     scanf("%d",&id_buscado);
-    getchar();
+    while (getchar() != '\n');
    
     printf("Ingrese el ID del GASTO a eliminar: ");
     scanf("%d", &id_buscado);
-    getchar();
+    while (getchar() != '\n');
     for (int i = 0; i < *diml3; i++)
     {
         if(gasto[i].IDGasto == id_buscado)
@@ -336,7 +336,7 @@ void consultar_usuario_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCate
     int contadores_locales[5] = {0};
     printf("\nIngrese ID de usuario para generar reporte: ");
     scanf("%d", &id_buscado);
-    getchar();
+    while (getchar() != '\n');
     for (int i = 0; i < *diml2; i++)
     {
         if (users[i].ID == id_buscado)
@@ -392,7 +392,7 @@ void mostrar_menu_calculos_estadisticos(tipoGastos gasto[], int *diml3)
         printf("\n5 - Volver");
         printf("\nSeleccione una opcion: ");
         scanf("%d", &opcion);
-        getchar();
+        while (getchar() != '\n');
         if (opcion == 1)
         {
             calcular_promedio(gasto, diml3);
@@ -421,7 +421,7 @@ void calcular_promedio(tipoGastos gasto[], int *diml3)
 
     printf("\nIngrese su ID de usuario: ");
     scanf("%d", &ID_buscado);
-    getchar();
+    while (getchar() != '\n');
 
     for (int i = 0; i < *diml3; i++)
     {
@@ -454,7 +454,7 @@ void calcular_minimo(tipoGastos gasto[], int *diml3)
 
     printf("\nIngrese su ID de usuario: ");
     scanf("%d", &ID_buscado);
-    getchar();
+    while (getchar() != '\n');
 
     for (j = 0; j < *diml3; j++)
     {
@@ -491,7 +491,7 @@ void calcular_maximo(tipoGastos gasto[], int *diml3)
 
     printf("\nIngrese su ID de usuario: ");
     scanf("%d", &ID_buscado);
-    getchar();
+    while (getchar() != '\n');
 
     for (j = 0; j < *diml3; j++)
     {
