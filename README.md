@@ -145,3 +145,62 @@ gcc main.c functions.c -o gestion_gastos
 - [x] Agregar / modificar / eliminar gastos
 - [x] Reporte por usuario con detalle por categoria
 - [x] Estadisticas: promedio, minimo y maximo por usuario
+
+---
+
+## 🛠️ Proceso de desarrollo
+
+Durante el desarrollo del proyecto se identificaron y corrigieron varios errores con ayuda externa. A continuacion se detallan los principales problemas encontrados y los conceptos aprendidos.
+
+### Bugs corregidos
+
+#### 1. Variable sin inicializar usada como indice
+**Funcion:** `agregar_gastos`  
+**Error:** La variable `j` se declaraba pero nunca se le asignaba un valor. Al usarla como indice (`users[j]`), accedia a una posicion random de memoria causando **segmentation fault**.  
+**Concepto:** En C, una variable declarada pero no inicializada no vale 0 — vale lo que haya en ese espacio de memoria en ese momento (basura). Siempre hay que inicializar las variables antes de usarlas.
+
+#### 2. Mezcla de `gasto->campo` con `gasto[i].campo`
+**Funcion:** `agregar_gastos`  
+**Error:** Se mezclaban dos formas de acceder al mismo vector. `gasto->campo` es exactamente igual a `gasto[0].campo` — siempre apunta al primer elemento. Esto hacia que los datos de un mismo gasto quedaran repartidos en posiciones distintas del vector.  
+**Concepto:** Cuando se trabaja con un vector de structs, hay que elegir un unico indice y usarlo consistentemente para todas las operaciones del mismo elemento.
+
+#### 3. ID del usuario usado como indice del vector
+**Funcion:** `agregar_gastos`  
+**Error:** Se usaba `users[ID_buscado]` en vez de `users[i]`. El ID de un usuario y su posicion en el vector son cosas distintas — el indice `i` del loop es la posicion real en memoria, no el ID logico.  
+**Concepto:** En casi todos los programas el ID no coincide con la posicion. Si se elimina un usuario y se crea uno nuevo, ese usuario puede estar en la posicion 0 pero tener ID 3. Usar el ID como indice accede a la posicion equivocada o fuera del vector.
+
+#### 4. `else` adentro del loop de busqueda
+**Funciones:** `eliminar_usuario`, `modificar_perfil_usuario`, `consultar_usuario_reporte`, `calcular_maximo`  
+**Error:** El mensaje "no encontrado" estaba dentro del `for`, entonces se imprimia en cada iteracion que no coincidia — antes de terminar de recorrer todo el vector.  
+**Concepto:** Todo lo que depende de haber recorrido el vector completo debe ir afuera del loop. El loop es para buscar y comparar; el resultado se muestra despues usando una variable bandera `encontrado`.
+
+#### 5. Inicializar minimo/maximo en 0
+**Funciones:** `calcular_minimo`, `calcular_maximo`  
+**Error:** `gasto_min` se inicializaba en 0. Si todos los gastos son positivos, ninguno va a ser menor que 0, por lo que la comparacion nunca actualizaba el minimo.  
+**Concepto:** La forma correcta de buscar un minimo o maximo es inicializar con el primer elemento del conjunto y comparar el resto contra ese valor.
+
+#### 6. Comparar un array con `> 0`
+**Funcion:** `calcular_promedio`  
+**Error:** Se intentaba comparar `gasto[i].cantGastos > 0`, pero `cantGastos` es un array. En C, comparar un array con un numero compara la direccion de memoria del array, no su contenido — la condicion siempre era verdadera.  
+**Concepto:** Para saber si hay elementos en un array de contadores hay que sumar sus valores primero y comparar el total.
+
+#### 7. Loop de inicializacion con tamaño incorrecto
+**Funcion:** `inicializar_gastos`  
+**Error:** El loop iteraba solo 5 veces en vez de `MAX_GASTOS` (100). Los 95 elementos restantes quedaban sin inicializar con valores basura en memoria.  
+**Concepto:** Siempre usar las constantes definidas (`MAX_GASTOS`) en vez de valores hardcodeados para evitar inconsistencias.
+
+#### 8. Falta de corrimiento al eliminar elementos
+**Funciones:** `eliminar_usuario`, `eliminar_gastos`  
+**Error:** Al eliminar un elemento solo se borraban sus campos, dejando un hueco en el medio del vector.  
+**Concepto:** Al eliminar un elemento de un vector estatico en C, hay que desplazar todos los elementos siguientes una posicion hacia la izquierda y decrementar la dimension logica.
+
+### Conceptos clave aprendidos
+
+| Concepto | Descripcion |
+|----------|-------------|
+| Dimension logica vs fisica | El vector tiene capacidad fija (fisica) pero solo se usan los primeros N elementos (logica) |
+| Punteros como parametros | Pasar `int *diml` permite modificar la variable original desde dentro de una funcion |
+| `->` vs `[]` | `ptr->campo` = `ptr[0].campo`, siempre accede al primer elemento |
+| ID vs indice | El ID es un identificador logico; el indice es la posicion real en memoria |
+| Variable bandera | Usar `int encontrado = 0` para saber si se encontro algo al terminar un loop |
+| DRY | No repetir el mismo bloque de codigo N veces; calcular el indice con una variable |
