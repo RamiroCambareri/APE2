@@ -24,20 +24,20 @@ int main()
     {
         if (opcion == 1)
         {
-            mostrar_menu_perfil(users, &diml2); // Mostramos el perfil del primer usuario
+            mostrar_menu_perfil(users, &diml2); // Mostramos el menu perfil para los usuarios
         }
         else if (opcion == 2)
         {
             // Pasamos referencias (&) para que los cambios persistan en el main
-            mostrar_menu_gastos(users, gasto, categorias, &diml2, &diml3); // Mostramos el menú de gastos para el primer usuario
+            mostrar_menu_gastos(users, gasto, categorias, &diml2, &diml3); // Mostramos el menú de gastos para los usuarios
         }
         else if (opcion == 3)
         {
-            generar_reporte(users, gasto, categorias, &diml2,&diml3); // Llamamos a la funcion para generar el reporte del primer usuario y su primer gasto
+            generar_reporte(users, gasto, categorias, &diml2,&diml3); // Llamamo a generar reporte para que vean sus gastos los usuarios
         }
         else if (opcion == 4)
         {
-            mostrar_menu_calculos_estadisticos(gasto, &diml3);
+            mostrar_menu_calculos_estadisticos(gasto, &diml3); // llamamos al menu de calculos estadisticos
         }
         else if (opcion != 5)
         {

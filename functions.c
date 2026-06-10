@@ -272,10 +272,16 @@ void modificar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria cat
     }
 }
 
-void eliminar_gastos(tipoUsuario users[], tipoGastos gasto[], int *diml3)
+void eliminar_gastos(tipoUsuario users[], tipoGastos gasto[],int *diml3)
 {
     int id_buscado;
-
+    if(*diml3 == 0){
+        printf("No se ingreso ningun gasto");
+        return;
+    }
+    printf("Ingrese eL ID de usuario: ");
+    scanf("%d",&id_buscado);
+   
     printf("Ingrese el ID del GASTO a eliminar: ");
     scanf("%d", &id_buscado);
     for (int i = 0; i < *diml3; i++)
@@ -292,7 +298,7 @@ void eliminar_gastos(tipoUsuario users[], tipoGastos gasto[], int *diml3)
             return;
         }
     }
-    printf("\nGasto con ID %d no encontrado.\n", id_buscado);
+   printf("\nGasto con ID %d no encontrado.\n", id_buscado);
 }
 
 void consultar_usuario_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3)
