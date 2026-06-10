@@ -142,7 +142,7 @@ void eliminar_usuario(tipoUsuario users[], int *diml2)
                 users[j] = users[j + 1];
             }
             (*diml2)--;
-            printf("\nUsuario eliminado. Nueva dimension logica: %d\n", *diml2);
+            printf("\nUsuario eliminado.\n");
             return;
         }
     }
@@ -155,7 +155,7 @@ void mostrar_menu_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria 
     int eleccion = 0;
     while (eleccion != 5)
     {
-        printf("\n--- [MENU DE GASTOS] ---");
+        printf("\n--- [SUBMENU GASTOS] ---");
         printf("\n1 - Agregar gasto");    
         printf("\n2 - Modificar gastos"); 
         printf("\n3 - Eliminar gastos");
@@ -294,7 +294,7 @@ void eliminar_gastos(tipoUsuario users[], tipoGastos gasto[],int *diml3)
                 gasto[j] = gasto[j + 1];
             }
             (*diml3)--;
-            printf("\nGasto eliminado. Nueva dimension logica: %d\n", *diml3);
+            printf("\nGasto eliminado.\n");
             return;
         }
     }
@@ -356,7 +356,7 @@ void mostrar_menu_calculos_estadisticos(tipoGastos gasto[], int *diml3)
     int opcion = 0;
     while (opcion != 5)
     {
-        printf("\n--- [ESTADISTICAS] ---");
+        printf("\n--- [SUBMENU CALCULOS ESTADISTICOS] ---");
         printf("\n1 - Calcular Promedio general");
         printf("\n2 - Buscar gasto minimo");
         printf("\n3 - Buscar gasto maximo");

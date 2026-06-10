@@ -13,7 +13,6 @@ typedef struct Usuario
 typedef struct Categoria
 {
     char nombreCategoria[MAX_NOMBRE_CATEGORIA + 1]; // se pone + 1 para dejar el espacio para el '\0'
-    int IdCategoria;
 } tipoCategoria;
 
 typedef struct Gastos
