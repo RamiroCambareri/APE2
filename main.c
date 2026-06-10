@@ -19,12 +19,13 @@ int main()
     inicializar_gastos(gasto);
 
     mostrar_menu(&opcion);
+    
 
     while (opcion != 5)
     {
         if (opcion == 1)
         {
-            mostrar_menu_perfil(users, &diml2); // Mostramos el menu perfil para los usuarios
+            mostrar_menu_perfil(users, gasto,&diml2,&diml3); // Mostramos el menu perfil para los usuarios
         }
         else if (opcion == 2)
         {

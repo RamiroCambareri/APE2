@@ -4,9 +4,9 @@
 
 /* Menu Principal */
 void mostrar_menu(int *opcion); 
-void mostrar_menu_perfil(tipoUsuario users[], int *diml2); 
+void mostrar_menu_perfil(tipoUsuario users[], tipoGastos gasto[],int *diml2, int *diml3); 
 void crear_usuarios(tipoUsuario users[], int *diml2); 
-void eliminar_usuario(tipoUsuario users[], int *diml2); 
+void eliminar_usuario(tipoUsuario users[], tipoGastos gasto[],int *diml2, int *diml3); 
 void modificar_perfil_usuario(tipoUsuario users[], int *diml2);
 
 /* Inicializar registros */
