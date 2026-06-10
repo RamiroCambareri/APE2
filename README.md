@@ -148,7 +148,7 @@ gcc main.c functions.c -o gestion_gastos
 
 ---
 
-## 🛠️ Proceso de desarrollo
+## 🛠️ Desarrollo y aprendizajes
 
 ### 🔍 Dificultades encontradas durante el desarrollo
 Durante la implementación del proyecto surgieron distintos problemas relacionados con el manejo de vectores, estructuras, índices y validaciones. La resolución de estos inconvenientes permitió reforzar conceptos fundamentales del lenguaje C y comprender mejor el funcionamiento interno del programa.
@@ -181,3 +181,13 @@ Durante la implementación del proyecto surgieron distintos problemas relacionad
 * Uso de variables bandera para búsquedas.
 * Importancia de la inicialización de variables.
 * Gestión de memoria y acceso seguro a vectores.
+
+
+
+
+
+### Uso de herramientas de apoyo
+
+Durante la etapa de depuración se utilizó inteligencia artificial como herramienta de consulta y aprendizaje para comprender el origen de algunos errores y reforzar conceptos del lenguaje C. Su uso estuvo orientado principalmente al análisis de problemas, la interpretación de mensajes de error y la comprensión de conceptos relacionados con vectores, estructuras, punteros e índices.
+
+Las correcciones implementadas fueron analizadas y adaptadas por el equipo a partir de ese proceso de aprendizaje, utilizando la herramienta como apoyo para comprender el funcionamiento del código y no únicamente para obtener soluciones directas.
