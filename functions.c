@@ -9,10 +9,10 @@ void mostrar_menu(int *opcion)
     printf("\n================================");
     printf("\n  ---  GESTION DE GASTOS  ---   ");
     printf("\n================================");
-    printf("\n1 - Menu de Perfil");  
-    printf("\n2 - Menu de Gastos");  
-    printf("\n3 - Generar Reporte"); 
-    printf("\n4 - Estadisticas");    
+    printf("\n1 - Menu de Perfil");
+    printf("\n2 - Menu de Gastos");
+    printf("\n3 - Generar Reporte");
+    printf("\n4 - Estadisticas");
     printf("\n5 - Salir");
     printf("\nSeleccione una opcion: ");
     scanf("%d", opcion);
@@ -20,26 +20,27 @@ void mostrar_menu(int *opcion)
 }
 
 // Implementacion de la funcion para mostrar el submenu de perfil
-void mostrar_menu_perfil(tipoUsuario users[], tipoGastos gasto[],int *diml2,int *diml3)
+void mostrar_menu_perfil(tipoUsuario users[], tipoGastos gasto[], int *diml2, int *diml3)
 {
     int eleccion = 0;
     while (eleccion != 5)
     {
         printf("\n--- [SUBMENU PERFIL] ---");
-        printf("\n1 - Crear usuario");    
-        printf("\n2 - Eliminar usuario"); 
-        printf("\n3 - Modificar Perfil"); 
+        printf("\n1 - Crear usuario");
+        printf("\n2 - Eliminar usuario");
+        printf("\n3 - Modificar Perfil");
         printf("\n5 - Volver");
         printf("\nSeleccione una opcion: ");
         scanf("%d", &eleccion);
         while (getchar() != '\n');
+
         if (eleccion == 1)
         {
             crear_usuarios(users, diml2);
         }
         else if (eleccion == 2)
         {
-            eliminar_usuario(users, gasto,diml2, diml3);
+            eliminar_usuario(users, gasto, diml2, diml3);
         }
         else if (eleccion == 3)
         {
@@ -84,7 +85,6 @@ void crear_usuarios(tipoUsuario users[], int *diml2)
     if (*diml2 >= MAX_USUARIOS)
     {
         printf("\nNo se pueden agregar mas usuarios. Capacidad maxima alcanzada.\n");
-        return;
     }
     else
     {
@@ -97,6 +97,7 @@ void crear_usuarios(tipoUsuario users[], int *diml2)
         printf("\nIngrese DNI: ");
         scanf("%d", &users[i].dni);
         while (getchar() != '\n');
+
         users[i].ID = id_local;
         printf("\n El usuario creado es: %s %s, DNI: %d, ID: %d\n", users[i].nombre, users[i].apellido, users[i].dni, users[i].ID);
         (*diml2)++;
@@ -110,6 +111,7 @@ void modificar_perfil_usuario(tipoUsuario users[], int *diml2)
     int id_buscado;
     scanf("%d", &id_buscado);
     while (getchar() != '\n');
+
     for (int i = 0; i < *diml2; i++)
     {
         if (users[i].ID == id_buscado)
@@ -123,18 +125,21 @@ void modificar_perfil_usuario(tipoUsuario users[], int *diml2)
             scanf("%d", &users[i].dni);
             while (getchar() != '\n');
             printf("\nUsuario modificado. Nuevo perfil: %s %s, DNI: %d, ID: %d\n", users[i].nombre, users[i].apellido, users[i].dni, users[i].ID);
-            return;
+        }
+        else
+        {
+            printf("\nUsuario con ID %d no encontrado.\n", id_buscado);
         }
     }
-    printf("\nUsuario con ID %d no encontrado.\n", id_buscado);
 }
 
-void eliminar_usuario(tipoUsuario users[], tipoGastos gasto[],int *diml2, int *diml3)
+void eliminar_usuario(tipoUsuario users[], tipoGastos gasto[], int *diml2, int *diml3)
 {
     printf("\nIngrese ID de usuario a eliminar: ");
     int id_buscado;
     scanf("%d", &id_buscado);
     while (getchar() != '\n');
+
     for (int i = 0; i < *diml2; i++)
     {
         // busca el id usuario
@@ -143,26 +148,30 @@ void eliminar_usuario(tipoUsuario users[], tipoGastos gasto[],int *diml2, int *d
             printf("\nUsuario encontrado, eliminando...");
             // Eliminar usuario (marcar como vacio o reiniciar campos)
             // corrimiento
-            for (int g = 0; g<*diml3; g++){
-                if(gasto[g].usuario.ID == id_buscado){
-                    for (int j = g; j < (*diml3) - 1; j++){
-                    gasto[j] = gasto[j + 1];
+            for (int g = 0; g < *diml3; g++)
+            {
+                if (gasto[g].usuario.ID == id_buscado)
+                {
+                    for (int j = g; j < (*diml3) - 1; j++)
+                    {
+                        gasto[j] = gasto[j + 1];
+                    }
+                    (*diml3)--;
+                    g--;
                 }
-                (*diml3)--;
-                g--;
-
             }
-                
+            for (int j = i; j < (*diml2) - 1; j++)
+            {
+                users[j] = users[j + 1];
+            }
+            (*diml2)--;
+            printf("\nUsuario eliminado.\n");
         }
-        for(int j = i; j < (*diml2)-1;j++){
-            users[j] = users[j+1];
-        }
-        (*diml2)--;
-        printf("\nUsuario eliminado.\n");
-        return;
+        else
+        {
+            printf("\nUsuario con ID %d no encontrado\n", id_buscado);
         }
     }
-    printf("\nUsuario con ID %d no encontrado\n", id_buscado);
 }
 
 // Implementacion de procedimiento mostrar_menu_gastos
@@ -172,8 +181,8 @@ void mostrar_menu_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria 
     while (eleccion != 5)
     {
         printf("\n--- [SUBMENU GASTOS] ---");
-        printf("\n1 - Agregar gasto");    
-        printf("\n2 - Modificar gastos"); 
+        printf("\n1 - Agregar gasto");
+        printf("\n2 - Modificar gastos");
         printf("\n3 - Eliminar gastos");
         printf("\n5 - Volver");
         printf("\nSeleccione una opcion: ");
@@ -211,49 +220,49 @@ void agregar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categ
     if (*diml3 >= MAX_GASTOS)
     {
         printf("\nCapacidad maxima de gastos alcanzada.\n");
-        return;
     }
-    if(*diml2 == 0){
-        printf("\nNo hay usuarios creados. Primero cree una cuenta para agregar un gasto\n");
-        return;
-    }
-
-    printf("Ingrese su id de usuario: ");
-    scanf("%d", &ID_buscado);
-    while (getchar() != '\n');
-
-    for (i = 0; i < *diml2; i++)
+    else if (*diml2 == 0)
     {
-        if (users[i].ID == ID_buscado)
+        printf("\nNo hay usuarios creados. Primero cree una cuenta para agregar un gasto\n");
+    }
+    else
+    {
+        printf("Ingrese su id de usuario: ");
+        scanf("%d", &ID_buscado);
+        while (getchar() != '\n');
+
+        for (i = 0; i < *diml2; i++)
         {
-            printf("Usuario valido!");
-            printf("Categorias disponibles:\n");
-            for (int j = 0; j < 5; j++)
+            if (users[i].ID == ID_buscado)
             {
-                printf("\n|--- Categoria %d: ", j + 1);
-                printf("|");
+                printf("Usuario valido!");
+                printf("Categorias disponibles:\n");
+                for (int j = 0; j < 5; j++)
+                {
+                    printf("\n|--- Categoria %d: ", j + 1);
+                    printf("|");
 
-                printf("%s\n", categorias[j].nombreCategoria);
-            }
+                    printf("%s\n", categorias[j].nombreCategoria);
+                }
 
-            printf("\nSeleccione una de las opciones que se muestran en pantalla [6 para salir]: ");
-            scanf("%d", &opcion);
-            while (getchar() != '\n');
-
-            if (opcion >= 1 && opcion <= 5)
-            {
-                int idx = opcion - 1;
-                printf("\nIngrese monto del gasto: ");
-                scanf("%f", &gasto[posicion].gasto);
+                printf("\nSeleccione una de las opciones que se muestran en pantalla [6 para salir]: ");
+                scanf("%d", &opcion);
                 while (getchar() != '\n');
-                gasto[posicion].IDGasto = posicion + 1;
-                gasto[posicion].usuario = users[i];
-                gasto[posicion].categoria = categorias[idx];
-                gasto[posicion].cantGastos[idx]++;
-                gasto[posicion].sumaGastos += gasto[posicion].gasto;
-                (*diml3)++;
-                printf("\n\tGasto agregado. Categoria: %s, Monto: %.2f\n", categorias[idx].nombreCategoria, gasto[posicion].gasto);
-                break;
+
+                if (opcion >= 1 && opcion <= 5)
+                {
+                    int idx = opcion - 1;
+                    printf("\nIngrese monto del gasto: ");
+                    scanf("%f", &gasto[posicion].gasto);
+                    while (getchar() != '\n');
+                    gasto[posicion].IDGasto = posicion + 1;
+                    gasto[posicion].usuario = users[i];
+                    gasto[posicion].categoria = categorias[idx];
+                    gasto[posicion].cantGastos[idx]++;
+                    gasto[posicion].sumaGastos += gasto[posicion].gasto;
+                    (*diml3)++;
+                    printf("\n\tGasto agregado. Categoria: %s, Monto: %.2f\n", categorias[idx].nombreCategoria, gasto[posicion].gasto);
+                }
             }
         }
     }
@@ -261,7 +270,7 @@ void agregar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categ
     ////////  MUESTRA EN PANTALLA EL GASTO REGISTRADO y DEMAS INFORMACION ACERCA DEL GASTO   /////////
     for (int i = 0; i < *diml3; i++)
     {
-        printf("\n--- Gasto %d registrado ---\n", i+1);
+        printf("\n--- Gasto %d registrado ---\n", i + 1);
         printf("\nID Gasto: %d", gasto[i].IDGasto);
         printf("\nMonto del gasto: %.2f", gasto[i].gasto);
         printf("\nUsuario asociado: %s %s, DNI: %d, ID usuario: %d\n", gasto[i].usuario.nombre, gasto[i].usuario.apellido, gasto[i].usuario.dni, gasto[i].usuario.ID);
@@ -282,6 +291,7 @@ void modificar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria cat
         printf("\n Ingrese el ID del gasto a modificar: ");
         scanf("%d", &id_buscado);
         while (getchar() != '\n');
+
         for (int i = 0; i < *diml3; i++)
         {
             if (gasto[i].IDGasto == id_buscado)
@@ -290,43 +300,52 @@ void modificar_gastos(tipoUsuario users[], tipoGastos gasto[], tipoCategoria cat
                 printf("\nIngrese nuevo monto del gasto: ");
                 scanf("%f", &gasto[i].gasto);
                 while (getchar() != '\n');
+
                 printf("\nGasto modificado. Nuevo monto: %.2f\n", gasto[i].gasto);
-                return;
+            }
+            else
+            {
+                printf("\nGasto con ID %d no encontrado.\n", id_buscado);
             }
         }
-        printf("\nGasto con ID %d no encontrado.\n", id_buscado);
     }
 }
 
-void eliminar_gastos(tipoUsuario users[], tipoGastos gasto[],int *diml3)
+void eliminar_gastos(tipoUsuario users[], tipoGastos gasto[], int *diml3)
 {
     int id_buscado;
-    if(*diml3 == 0){
-        printf("No se ingreso ningun gasto");
-        return;
-    }
-    printf("Ingrese eL ID de usuario: ");
-    scanf("%d",&id_buscado);
-    while (getchar() != '\n');
-   
-    printf("Ingrese el ID del GASTO a eliminar: ");
-    scanf("%d", &id_buscado);
-    while (getchar() != '\n');
-    for (int i = 0; i < *diml3; i++)
+    if (*diml3 == 0)
     {
-        if(gasto[i].IDGasto == id_buscado)
+        printf("No se ingreso ningun gasto");
+    }
+    else
+    {
+        printf("Ingrese eL ID de usuario: ");
+        scanf("%d", &id_buscado);
+        while (getchar() != '\n');
+
+        printf("Ingrese el ID del GASTO a eliminar: ");
+        scanf("%d", &id_buscado);
+        while (getchar() != '\n');
+
+        for (int i = 0; i < *diml3; i++)
         {
-            printf("Gasto encontrado, eliminando...");
-            for (int j = i; j < (*diml3) - 1; j++)
+            if (gasto[i].IDGasto == id_buscado)
             {
-                gasto[j] = gasto[j + 1];
+                printf("Gasto encontrado, eliminando...");
+                for (int j = i; j < (*diml3) - 1; j++)
+                {
+                    gasto[j] = gasto[j + 1];
+                }
+                (*diml3)--;
+                printf("\nGasto eliminado.\n");
             }
-            (*diml3)--;
-            printf("\nGasto eliminado.\n");
-            return;
+            else
+            {
+                printf("\nGasto con ID %d no encontrado.\n", id_buscado);
+            }
         }
     }
-   printf("\nGasto con ID %d no encontrado.\n", id_buscado);
 }
 
 void consultar_usuario_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3)
@@ -367,10 +386,12 @@ void consultar_usuario_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCate
             {
                 printf("Cantidad de gastos en categorias %s: %d\n", categorias[j].nombreCategoria, contadores_locales[j]);
             }
-            return;
+        }
+        else
+        {
+            printf("\nEl usuario con ID %d no existe en el sistema.\n", id_buscado);
         }
     }
-    printf("\nEl usuario con ID %d no existe en el sistema.\n", id_buscado);
 }
 
 void generar_reporte(tipoUsuario users[], tipoGastos gasto[], tipoCategoria categorias[], int *diml2, int *diml3)
